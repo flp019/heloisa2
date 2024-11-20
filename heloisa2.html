@@ -1,0 +1,294 @@
+<html><head><base href="https://example.com/"></head><body>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mundo dos Jogos da Heloisa!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Neue', cursive;
+            background: linear-gradient(135deg, #ff9ecd, #9b6dff);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .header {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .daily-timer {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 15px;
+            margin: 20px auto;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .daily-timer h3 {
+            color: #ff6bb5;
+            margin-bottom: 10px;
+        }
+
+        .daily-progress-bar {
+            width: 100%;
+            height: 25px;
+            background-color: #eee;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .daily-progress {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #ff6bb5, #9b6dff);
+            transition: width 1s linear;
+        }
+
+        .logo {
+            font-family: 'Fredoka One', cursive;
+            font-size: 2.5em;
+            color: #ff6bb5;
+            text-shadow: 2px 2px #e2c0ff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        .game-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .time-over-message {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 107, 181, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            color: white;
+            font-size: 1.5em;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+        }
+
+        .game-container.locked::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            z-index: 2;
+        }
+
+        .game-container.locked::after {
+            content: '🔒 Tempo de jogo esgotado por hoje!';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 1.2em;
+            text-align: center;
+            z-index: 3;
+            width: 80%;
+        }
+
+        .game-title {
+            text-align: center;
+            font-size: 1.5em;
+            color: #6b4bff;
+            margin-bottom: 20px;
+            font-family: 'Fredoka One', cursive;
+        }
+
+        .game-frame {
+            width: 100%;
+            height: 400px;
+            border: 8px solid #fff;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        .floating-stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .star {
+            position: absolute;
+            font-size: 20px;
+            animation: twinkle 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="floating-stars" id="stars"></div>
+        <h1 class="logo">✨ Mundo dos Jogos da Heloisa! ✨</h1>
+    </header>
+
+    <div class="daily-timer">
+        <h3>Tempo Restante de Jogo Hoje</h3>
+        <div id="dailyTimer">20:00</div>
+        <div class="daily-progress-bar">
+            <div class="daily-progress" id="dailyProgress"></div>
+        </div>
+    </div>
+
+    <div class="game-grid">
+        <div class="game-container" id="game1">
+            <h2 class="game-title">Bandeiras do Mundo 🌎</h2>
+            <iframe class="game-frame" src="https://www.lofgames.com/wgames/world_flags_trivia/index.html?key=y8&value=default" allowfullscreen></iframe>
+        </div>
+
+        <div class="game-container" id="game2">
+            <h2 class="game-title">Gênio da Matemática 🔢</h2>
+            <iframe class="game-frame" src="https://html5.gamedistribution.com/361fdf69f32941fd93d2916dfd5b7cee/?gd_sdk_referrer_url=https%3A%2F%2Fwww.y8.com%2Fgames%2Fmath_whizz&key=y8&value=default" allowfullscreen></iframe>
+        </div>
+
+        <div class="game-container" id="game3">
+            <h2 class="game-title">EvoWars.io 🎮</h2>
+            <iframe class="game-frame" src="https://y8.evowars.io/?key=y8&ratio_tolerant=true&v=1.5.12&value=default" allowfullscreen></iframe>
+        </div>
+
+        <div class="game-container" id="game4">
+            <h2 class="game-title">Happy Snakes 🐍</h2>
+            <iframe class="game-frame" src="https://html5.gamedistribution.com/2651a52596c64093b0309ff166d13a6f/?gd_sdk_referrer_url=https%3A%2F%2Fpt.y8.com%2Fgames%2Fhappy_snakes&key=y8&value=default" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div class="time-over-message" id="timeOverMessage">
+        Tempo de jogo acabou por hoje! 
+        <br>Volte amanhã para mais diversão! 🌟
+    </div>
+
+    <script>
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = 20;
+            const starSymbols = ['⭐', '✨', '💫'];
+
+            for(let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.textContent = starSymbols[Math.floor(Math.random() * starSymbols.length)];
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 2}s`;
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Daily timer functionality
+        const TOTAL_TIME = 20 * 60; // 20 minutes in seconds
+        let timeRemaining = TOTAL_TIME;
+        let dailyTimerInterval;
+
+        function startDailyTimer() {
+            // Check if there's a stored end time from today
+            const storedEndTime = localStorage.getItem('gameEndTime');
+            const now = new Date().getTime();
+            
+            if (storedEndTime) {
+                if (now > parseInt(storedEndTime)) {
+                    // It's a new day, reset the timer
+                    localStorage.removeItem('gameEndTime');
+                    timeRemaining = TOTAL_TIME;
+                } else {
+                    // Lock all games
+                    lockAllGames();
+                    return;
+                }
+            }
+
+            dailyTimerInterval = setInterval(updateDailyTimer, 1000);
+        }
+
+        function updateDailyTimer() {
+            timeRemaining--;
+            
+            // Update timer display
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            document.getElementById('dailyTimer').textContent = 
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+            // Update progress bar
+            const progress = (timeRemaining / TOTAL_TIME) * 100;
+            document.getElementById('dailyProgress').style.width = `${progress}%`;
+
+            if (timeRemaining <= 0) {
+                clearInterval(dailyTimerInterval);
+                lockAllGames();
+                showTimeOverMessage();
+                
+                // Store the end time
+                const endTime = new Date();
+                endTime.setHours(23, 59, 59, 999); // End of today
+                localStorage.setItem('gameEndTime', endTime.getTime().toString());
+            }
+        }
+
+        function lockAllGames() {
+            const games = document.querySelectorAll('.game-container');
+            games.forEach(game => game.classList.add('locked'));
+        }
+
+        function showTimeOverMessage() {
+            const message = document.getElementById('timeOverMessage');
+            message.style.display = 'block';
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 5000);
+        }
+
+        window.onload = function() {
+            createStars();
+            startDailyTimer();
+        };
+    </script>
+</body>
+</html>
+</body></html>
