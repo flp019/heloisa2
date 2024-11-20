@@ -1,0 +1,11 @@
+id: servidor-heloisa
+name: Servidor Heloisa
+version: 1.0.0
+description: "Servidor para hospedar o HTML do Heloisa2 localmente."
+repository: https://github.com/flp019/heloisa2.git
+icon: https://via.placeholder.com/150
+type: app
+ports:
+  - 8090:80
+services:
+  
