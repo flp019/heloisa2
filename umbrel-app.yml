@@ -8,4 +8,10 @@ type: app
 ports:
   - 8090:80
 services:
-  
+  servidor-heloisa:
+    build:
+      context: .
+    image: servidor-heloisa
+    container_name: servidor-heloisa
+    ports:
+      - "8090:80"
